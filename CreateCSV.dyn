@@ -1,0 +1,1788 @@
+{
+  "Uuid": "26ad8986-50a1-4bb6-9562-1e16a1063f35",
+  "IsCustomNode": false,
+  "Description": "",
+  "Name": "CreateCSV",
+  "ElementResolver": {
+    "ResolutionMap": {
+      "Math": {
+        "Key": "DSCore.Math",
+        "Value": "DSCoreNodes.dll"
+      },
+      "List": {
+        "Key": "List",
+        "Value": "BuiltIn.ds"
+      },
+      "DSCore.Object.Type": {
+        "Key": "DSCore.Object",
+        "Value": "DSCoreNodes.dll"
+      },
+      "DSCore.Object": {
+        "Key": "DSCore.Object",
+        "Value": "DSCoreNodes.dll"
+      }
+    }
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "AdvanceSteel.Nodes.Util.Beam.GetLength@AdvanceSteel.Nodes.SteelDbObject",
+      "Id": "874c29c98f114f9b8195d24b599a74d9",
+      "Inputs": [
+        {
+          "Id": "f92eeb811c0047a48ff4c53d7710d14f",
+          "Name": "steelObject",
+          "Description": "Advance Steel element\n\nSteelDbObject",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "3b53950179c140499ca66b4940a88895",
+          "Name": "beamLenth",
+          "Description": "The beam length value",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get Beam Length\n\nBeam.GetLength (steelObject: SteelDbObject): double"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "AdvanceSteel.Nodes.Util.Beam.GetBeamSawInformation@AdvanceSteel.Nodes.SteelDbObject",
+      "Id": "1f41ee8203344de4b5585133686df945",
+      "Inputs": [
+        {
+          "Id": "e233342a7f064a0c8a694adbcfd4b21d",
+          "Name": "steelObject",
+          "Description": "Advance Steel element\n\nSteelDbObject",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "92bd77b616d7446a85a2954a3171cf0d",
+          "Name": "SawLength",
+          "Description": "The Saw Length, Flange Angle At Start, Web Angle At Start, Flange Angle At End and Web Angle At End",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "1bcf31bac55f48419749b6680979d4e3",
+          "Name": "FlangeAngleAtStart",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "3346de2f7f764bdbbd854063d90a3bcd",
+          "Name": "WebAngleAtStart",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "08f97163795b4441ada5b607602b150e",
+          "Name": "FlangeAngleAtEnd",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "caea74f1ca7d4b15924714d12a2df843",
+          "Name": "WebAngleAtEnd",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get Saw Cut information from Beam Objects\n\nBeam.GetBeamSawInformation (steelObject: SteelDbObject): var[]..[]"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "// Winkelschnitte Start Profil\nFlangeAngleAtStart;\nWebAngleAtStart;\n\n// Winkelschnitte Ende Profil\nFlangeAngleAtEnd;\nWebAngleAtEnd;\n\n// Winkelberechnungen\nconstant = 4.84813681109311e-05;\n\nStartFlangeAngle = FlangeAngleAtStart / constant;\nStartWebAngle = WebAngleAtStart / constant;\nEndFlangeAngle = FlangeAngleAtEnd / constant;\nEndWebAngle = WebAngleAtEnd / constant;\n\nMath.Round(StartFlangeAngle, 2);\nMath.Round(StartWebAngle, 2);\nMath.Round(EndFlangeAngle, 2);\nMath.Round(EndWebAngle, 2);",
+      "Id": "4cbc37891c894bd4b3383e1f40e806d8",
+      "Inputs": [
+        {
+          "Id": "00b68e1a47ce4485b242beda4a7a8761",
+          "Name": "FlangeAngleAtStart",
+          "Description": "FlangeAngleAtStart",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "9cb31235342845929b63a251a57c13c4",
+          "Name": "WebAngleAtStart",
+          "Description": "WebAngleAtStart",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "02134d774ef44052b4173af2212c91ca",
+          "Name": "FlangeAngleAtEnd",
+          "Description": "FlangeAngleAtEnd",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "306de00e55ce47fe8ddccf8ba893b740",
+          "Name": "WebAngleAtEnd",
+          "Description": "WebAngleAtEnd",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "7c2774996e654327a4393e0fabe7ce3f",
+          "Name": "",
+          "Description": "Wert des Ausdrucks in Zeile 2",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "d4c3c57bdf304f49980a3b833cdb0368",
+          "Name": "",
+          "Description": "Wert des Ausdrucks in Zeile 3",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "504dfec4a12143b5bb81dcfd01ce2e59",
+          "Name": "",
+          "Description": "Wert des Ausdrucks in Zeile 6",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "8698d0c36df54347b39b81ea7ac65433",
+          "Name": "",
+          "Description": "Wert des Ausdrucks in Zeile 7",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "76d2c5c1b72149a39101ecc9f040dfde",
+          "Name": "",
+          "Description": "constant",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "8a8071bd5e2b46cbb916e38368f4d877",
+          "Name": "",
+          "Description": "StartFlangeAngle",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "daf7a668e50544d2bb1509b414f09617",
+          "Name": "",
+          "Description": "StartWebAngle",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "206d0c9d8f6446c8836240bf86365b4b",
+          "Name": "",
+          "Description": "EndFlangeAngle",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "8432089272f243a69bcfa52ee2ed3524",
+          "Name": "",
+          "Description": "EndWebAngle",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "4e2f222052634f74a39452d98ca959bb",
+          "Name": "",
+          "Description": "Wert des Ausdrucks in Zeile 17",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "ed9b722dad994639ab13d105eb27dd94",
+          "Name": "",
+          "Description": "Wert des Ausdrucks in Zeile 18",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "9b9e36dac0984bae8089f1012b945f09",
+          "Name": "",
+          "Description": "Wert des Ausdrucks in Zeile 19",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "613d9277fa414911a042626fbeced8a9",
+          "Name": "",
+          "Description": "Wert des Ausdrucks in Zeile 20",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Ermöglicht die direkte Erstellung von DesignScript-Code."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "4a85c1d881da4f5391fc4fd1d1854785",
+      "Inputs": [
+        {
+          "Id": "5d4489597b984db1b13d6a21f683b891",
+          "Name": "",
+          "Description": "Block, dessen Ausgabe angezeigt wird",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "1ff051b71e55433491ce339906521e4d",
+          "Name": "",
+          "Description": "Blockausgabe",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualisierung der Ausgabe des Blocks"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "aef54d3fe4db4ccfaa61978ca94ca2e7",
+      "Inputs": [
+        {
+          "Id": "a47312cc28b24f4b831caa39a75f77ef",
+          "Name": "",
+          "Description": "Block, dessen Ausgabe angezeigt wird",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "3681633d2fcb4b9182b3ced776c9e1cd",
+          "Name": "",
+          "Description": "Blockausgabe",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualisierung der Ausgabe des Blocks"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "07f395195de3418381def7e4f3c7b035",
+      "Inputs": [
+        {
+          "Id": "54651a8f73f641edb1f5d627f2cb5225",
+          "Name": "",
+          "Description": "Block, dessen Ausgabe angezeigt wird",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "4362f56f16c246eea1ef69cc240e6a57",
+          "Name": "",
+          "Description": "Blockausgabe",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualisierung der Ausgabe des Blocks"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "f6e927cf340c4313869dacb7402fcfa8",
+      "Inputs": [
+        {
+          "Id": "9ab60c95eacf498dad829bc25faffe44",
+          "Name": "",
+          "Description": "Block, dessen Ausgabe angezeigt wird",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "0740c2612ccc4a89b289e834c8447cb4",
+          "Name": "",
+          "Description": "Blockausgabe",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualisierung der Ausgabe des Blocks"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "528af7b6839940d988e15ceb5c6ff50c",
+      "Inputs": [
+        {
+          "Id": "2f7eabf915004d1ab5d1f272ebf5d416",
+          "Name": "",
+          "Description": "Block, dessen Ausgabe angezeigt wird",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "1ae8744cef1e45048929caf85e74e48b",
+          "Name": "",
+          "Description": "Blockausgabe",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualisierung der Ausgabe des Blocks"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "beamLength;\nMath.Round(beamLength,2);",
+      "Id": "b40f76455806497087a8ff9583932d53",
+      "Inputs": [
+        {
+          "Id": "9ef877e869fa4797ac9cab25fa698121",
+          "Name": "beamLength",
+          "Description": "beamLength",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "4be8d46cb57c4bc69e41543bce4f7a80",
+          "Name": "",
+          "Description": "Wert des Ausdrucks in Zeile 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "0aa8f6a897c54f86afe3e85fa10161df",
+          "Name": "",
+          "Description": "Wert des Ausdrucks in Zeile 2",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Ermöglicht die direkte Erstellung von DesignScript-Code."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "DSOffice.Data.ExportCSV@string,var[][]",
+      "Id": "64dac5a8fb184da691801b09e9a224f4",
+      "Inputs": [
+        {
+          "Id": "e18c17e4ac0f4e5b9a4473afcab6b6f3",
+          "Name": "filePath",
+          "Description": "Pfad, unter dem geschrieben werden soll\n\nstring",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "82713c1f42484f88b9196b5cd9c6d053",
+          "Name": "data",
+          "Description": "In CSV zu schreibende Liste von Listen\n\nvar[][]",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "c542724cd4774a4b84f1fad4776c0e37",
+          "Name": "void",
+          "Description": "void",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Schreibt eine Liste von Listen in Form kommagetrennter Werte in eine Datei. Die äußere Liste steht für Zeilen, die innere für Spalten.\n\nData.ExportCSV (filePath: string, data: var[][]): void"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.StringInput, CoreNodeModels",
+      "NodeType": "StringInputNode",
+      "InputValue": "Material",
+      "Id": "e5c4a1d91f4c43f59cad0714182cf96a",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "87d910b171464bc0b3fca055cb135ce8",
+          "Name": "",
+          "Description": "String",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Erstellt eine Zeichenfolge."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.Directory, CoreNodeModels",
+      "HintPath": "C:\\Users\\lukas.bernegger\\Desktop\\Testzeichnung",
+      "InputValue": "C:\\Users\\lukas.bernegger\\Desktop\\Testzeichnung",
+      "NodeType": "ExtensionNode",
+      "Id": "7c139cdf92b3470db44e8b013f70092e",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "eca71a02c5174c36b4fa1b477faee940",
+          "Name": "",
+          "Description": "Verzeichnispfad",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Ermöglicht die Auswahl eines Verzeichnisses auf dem System und gibt seinen Pfad zurück"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "destinationPath;\nname;\nfileName = destinationPath + \"\\\\\" + name + \".csv\";",
+      "Id": "890459855abc4df69e2b1a2e816b8b06",
+      "Inputs": [
+        {
+          "Id": "966f7e27e9c241149c654141c56f58c0",
+          "Name": "destinationPath",
+          "Description": "destinationPath",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "0b8c4c2a6a574ee0be407b1c26089836",
+          "Name": "name",
+          "Description": "name",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "e01034624bd241df91871ad01be6bf11",
+          "Name": "",
+          "Description": "Wert des Ausdrucks in Zeile 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "46e06255402242178a561036db38a20a",
+          "Name": "",
+          "Description": "Wert des Ausdrucks in Zeile 2",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "8d00d61f28884d85824e1168b4cc6b1b",
+          "Name": "",
+          "Description": "fileName",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Ermöglicht die direkte Erstellung von DesignScript-Code."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "19550f0b2bbf46698bd3b09cd851873c",
+      "Inputs": [
+        {
+          "Id": "28436f3bbf634cd0a0ec2b06da099837",
+          "Name": "",
+          "Description": "Block, dessen Ausgabe angezeigt wird",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "169fd570293347f4aded0d23b3af49c3",
+          "Name": "",
+          "Description": "Blockausgabe",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualisierung der Ausgabe des Blocks"
+    },
+    {
+      "ConcreteType": "AdvanceSteel.Nodes.ASObjectSelection, AdvanceSteelNodesUI",
+      "NodeType": "ExtensionNode",
+      "InstanceId": [
+        "83B",
+        "47C",
+        "89C"
+      ],
+      "Id": "c415763f636f4b2298e613b6803cfbe5",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "e06a8e626e0d40b992c62a415b560bc0",
+          "Name": "steelObjects",
+          "Description": "Die ausgewählten Elemente",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "AdvanceSteel.Nodes.Property.GetObjectProperties@AdvanceSteel.Nodes.SteelDbObject",
+      "Id": "eefb7d5fb81e4a7b9227e3d6ef1d8227",
+      "Inputs": [
+        {
+          "Id": "a9280f3dbb9140e2a8911b5bae363d35",
+          "Name": "steelObject",
+          "Description": "Steel object\n\nSteelDbObject",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "03170b3e282649dfaf6f837ddb66db09",
+          "Name": "properties",
+          "Description": "List with all properties extracted from the input object",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get all properties from a steel object\n\nProperty.GetObjectProperties (steelObject: SteelDbObject): Property[]"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "229c4a55403e478185ca9358523b290c",
+      "Inputs": [
+        {
+          "Id": "111bfc05eb43423696b8b5b1ba8419cf",
+          "Name": "",
+          "Description": "Block, dessen Ausgabe angezeigt wird",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "90c4aaf4e5074c509038e4488f56a6e5",
+          "Name": "",
+          "Description": "Blockausgabe",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualisierung der Ausgabe des Blocks"
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Phython-Standard- und DesignScript-Bibliotheken laden\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\n# Initialisieren\r\nsteelObjectPropertys = IN[0]\r\nbeamLength = IN[1]\r\nstartFlangeAngle = IN[2]\r\nstartWebAngle = IN[3]\r\nendFlangeAngle = IN[4]\r\nendWebAngle = IN[5]\r\n\r\nobjectPropertyList = []\r\nobjectPropertyListCSV = []\r\n\r\n# Funktionen\r\ndef getValue(property):  # Filtert den Wert aus einem String\r\n    property = property.split(\" = \")\r\n    propertyName = property[0]\r\n    property = property[1]\r\n    \r\n    # Positionsnummer in eine Zahl umzuwandeln.\r\n    if propertyName == \"SinglePartNumber\":\r\n        property = int(property)\r\n    \r\n    return property\r\n\r\ndef convertToCsvFormat(tuple):\r\n    tuple = str(tuple)\r\n    string = tuple.replace(\", \", \";\").replace(\"'\", \"\").replace(\"(\", \"\").replace(\")\", \"\")\r\n    \r\n    return string\r\n\r\ndef checkOcurrences(propertyList, posNum):  # Zur Prüfung ob Teilenummer bereits vorhanden.\r\n    \r\n    return None\r\n       \r\n\r\n# Erstellt aus der kompletten Eigenschaftenliste eine neue Liste mit nur den benötigten Eigenschaften.\r\nfor objectIndex in range(0, len(steelObjectPropertys)):\r\n    \"\"\"\r\n    Profileigenschaften können hier beliebig erweitert übernommen werden und müssen\r\n    dann nur noch bei ObjectPropertieList in der gewünschten Reihenfolge angehängt werden.\r\n    Index 4 = Name\r\n    Index 32 = Material\r\n    Index 50 = Einzelteilnummer\r\n    \"\"\"\r\n    \r\n    profileName = str(steelObjectPropertys[objectIndex][4])\r\n    profileMaterial = str(steelObjectPropertys[objectIndex][32])\r\n    profileSinglePartNumber = str(steelObjectPropertys[objectIndex][50])\r\n    \r\n    # Filtert den Wert aus dem String\r\n    profileName = getValue(profileName)\r\n    profileMaterial = getValue(profileMaterial)\r\n    profileSinglePartNumber = getValue(profileSinglePartNumber)\r\n    \r\n    # Prüfe ob Einzelteilnummber bereits vorhanden.\r\n    \r\n    temp = checkOcurrences(objectPropertyList, profileSinglePartNumber) #### Funktion noch nicht fertig ####\r\n    \r\n    entry = (profileSinglePartNumber, \r\n             profileName, \r\n             profileMaterial, \r\n             beamLength[objectIndex],\r\n             startFlangeAngle[objectIndex],\r\n             startWebAngle[objectIndex],\r\n             endFlangeAngle[objectIndex],\r\n             endWebAngle[objectIndex])\r\n            \r\n    objectPropertyList.append(entry)\r\n\r\n# In String mit ; Trennzeichen umwandeln\r\nfor item in objectPropertyList:\r\n    item = convertToCsvFormat(item)\r\n    objectPropertyListCSV.append(item)\r\n\r\n\r\n# Ausgabe über die OUT Variable.\r\n#OUT = objectPropertyListCSV\r\n\r\nOUT = temp  # Für Temporärausgabe zur Überprüfng von Werten.",
+      "Engine": "CPython3",
+      "EngineName": "CPython3",
+      "VariableInputPorts": true,
+      "Id": "bcc504ea7af0425b82a52cf49d29a4b3",
+      "Inputs": [
+        {
+          "Id": "5980d07f64bd448c95b89b0e3625231d",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "3c896ae141c54892848d3e43c1a5b426",
+          "Name": "IN[1]",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "58d0a731d4024341b9503043c8e27fe9",
+          "Name": "IN[2]",
+          "Description": "Input #2",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "161c2b9720d1400489761dcb51e25562",
+          "Name": "IN[3]",
+          "Description": "Input #3",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "1dd5abfbb5be41dfb994111fa21cce9d",
+          "Name": "IN[4]",
+          "Description": "Input #4",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "f246f7c7eef24b7bbdbf68b9dc54a950",
+          "Name": "IN[5]",
+          "Description": "Input #5",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "64f4b1e6094943fb93bfef4cac83b045",
+          "Name": "OUT",
+          "Description": "Ergebnis des Python-Skripts",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Führt ein eingebettetes Python-Skript aus."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "a969da3fa97049579ad992ea32cbeaa4",
+      "Inputs": [
+        {
+          "Id": "124f46256f924662bd5f27fcf9d85f96",
+          "Name": "",
+          "Description": "Block, dessen Ausgabe angezeigt wird",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "9420d7b94b084b3188fb660578f85a51",
+          "Name": "",
+          "Description": "Blockausgabe",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualisierung der Ausgabe des Blocks"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "c097c984ef034d93bd12caf8e8338f84",
+      "Inputs": [
+        {
+          "Id": "3037ab3c86e640dfab074a820453d97a",
+          "Name": "",
+          "Description": "Block, dessen Ausgabe angezeigt wird",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "e99c767e2d024ad0a97d34a3391cb696",
+          "Name": "",
+          "Description": "Blockausgabe",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualisierung der Ausgabe des Blocks"
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "# Phython-Standard- und DesignScript-Bibliotheken laden\r\nimport sys\r\nimport clr\r\nclr.AddReference('ProtoGeometry')\r\nfrom Autodesk.DesignScript.Geometry import *\r\n\r\n# Initialisieren\r\nsteelObjects = IN[0]\r\n\r\nstraightBeamObjects = []\r\nplateObjects = []\r\notherObjects = []\r\n\r\n# Filtern in 2 Listen\r\nfor object in steelObjects:\r\n    name = str(object)\r\n    if name == \"StraightBeam\":\r\n        straightBeamObjects.append(object)\r\n    elif name == \"Plate\":\r\n        plateObjects.append(object)\r\n    else:\r\n        otherObjects.append(object)\r\n\r\n\r\n# Weisen Sie Ihre Ausgabe der OUT-Variablen zu.\r\nOUT = [straightBeamObjects,\r\n       plateObjects,\r\n       otherObjects]",
+      "Engine": "CPython3",
+      "EngineName": "CPython3",
+      "VariableInputPorts": true,
+      "Id": "8732e87678bd4b62b2da5a181e77244b",
+      "Inputs": [
+        {
+          "Id": "e65c576b38e641509e43e030a1912815",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "3857e2f83d3546bfb7f60905f75f583d",
+          "Name": "OUT",
+          "Description": "Ergebnis des Python-Skripts",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Führt ein eingebettetes Python-Skript aus."
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.CodeBlockNodeModel, DynamoCore",
+      "NodeType": "CodeBlockNode",
+      "Code": "filteredObjects;\n\n// Gerade Träger (StraightBeam)\nList.GetItemAtIndex(filteredObjects,0);\n\n// Bleche (Plate)\nList.GetItemAtIndex(filteredObjects,1);",
+      "Id": "8cafc9acf4694ab28367174f6ea2681f",
+      "Inputs": [
+        {
+          "Id": "05c8f661c69a441b83fbfe52d6c5bf39",
+          "Name": "filteredObjects",
+          "Description": "filteredObjects",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "203e948f60eb43899f2a15c678fbf7a4",
+          "Name": "",
+          "Description": "Wert des Ausdrucks in Zeile 1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "c080a5c925b04c9eb360e0d1892dfc13",
+          "Name": "",
+          "Description": "Wert des Ausdrucks in Zeile 4",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "90d6999ae35441f2945f89cd0b585c60",
+          "Name": "",
+          "Description": "Wert des Ausdrucks in Zeile 7",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Ermöglicht die direkte Erstellung von DesignScript-Code."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "276298edc1384f7cbb8d067bb4e4d566",
+      "Inputs": [
+        {
+          "Id": "e4ef0ff931d9410abc950cb29fd85c60",
+          "Name": "",
+          "Description": "Block, dessen Ausgabe angezeigt wird",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "2110bfe110e94c3b8f0bcf0900364a43",
+          "Name": "",
+          "Description": "Blockausgabe",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualisierung der Ausgabe des Blocks"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "6b2cbf7c53d941aeb543941222c536ed",
+      "Inputs": [
+        {
+          "Id": "649436c1db4748f7bbb21e8fd0c29e04",
+          "Name": "",
+          "Description": "Block, dessen Ausgabe angezeigt wird",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "a27908bab8294ab4bcba63bd1fa391d2",
+          "Name": "",
+          "Description": "Blockausgabe",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualisierung der Ausgabe des Blocks"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "AdvanceSteel.Nodes.Plates.Plate.GetPhysicalLengthAndWidth@AdvanceSteel.Nodes.SteelDbObject",
+      "Id": "43c6358a03d44c59b5b09a3e43ea3c85",
+      "Inputs": [
+        {
+          "Id": "04c3b3c7305e4f0a9764cb498bc3e1d8",
+          "Name": "steelObject",
+          "Description": "Advance Steel element\n\nSteelDbObject",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "6865ce529e524d1ab916ff42e939f5e5",
+          "Name": "Length",
+          "Description": "plate length and width values",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "cf43f71970ce44f980676463b87eb2c7",
+          "Name": "Width",
+          "Description": "var",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get Plate Physical Length and Width\n\nPlate.GetPhysicalLengthAndWidth (steelObject: SteelDbObject): var[]..[]"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "a0cd5fc192a14b979a7d58592c9f4adb",
+      "Inputs": [
+        {
+          "Id": "09329c2b8a21450faa92a641919546bf",
+          "Name": "",
+          "Description": "Block, dessen Ausgabe angezeigt wird",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "a9070191b7be4a90a40f4304d8fd3f04",
+          "Name": "",
+          "Description": "Blockausgabe",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Visualisierung der Ausgabe des Blocks"
+    },
+    {
+      "ConcreteType": "Dynamo.Graph.Nodes.ZeroTouch.DSFunction, DynamoCore",
+      "NodeType": "FunctionNode",
+      "FunctionSignature": "AdvanceSteel.Nodes.Util.SteelObject.GetQuantityInModel@AdvanceSteel.Nodes.SteelDbObject",
+      "Id": "e3df8b0c70894ca5802394a09e9ea3a1",
+      "Inputs": [
+        {
+          "Id": "1288cff935744966809f31929dac7ac0",
+          "Name": "steelObject",
+          "Description": "Advance Steel element\n\nSteelDbObject",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "1a56523eee4d4b88bdc194854f273159",
+          "Name": "objectQuantity",
+          "Description": "steelobject total quantity in the current model - numbering needs to be completed",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Auto",
+      "Description": "Get Quantity in Model\n\nSteelObject.GetQuantityInModel (steelObject: SteelDbObject): int"
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "3b53950179c140499ca66b4940a88895",
+      "End": "9ef877e869fa4797ac9cab25fa698121",
+      "Id": "8da2fbefd1ff424ba26a46627ab99417",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "1bcf31bac55f48419749b6680979d4e3",
+      "End": "00b68e1a47ce4485b242beda4a7a8761",
+      "Id": "157ac5dbb96a424f979d01dd54f14500",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "3346de2f7f764bdbbd854063d90a3bcd",
+      "End": "9cb31235342845929b63a251a57c13c4",
+      "Id": "8256d5387d244454af3c30212f5024d7",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "08f97163795b4441ada5b607602b150e",
+      "End": "02134d774ef44052b4173af2212c91ca",
+      "Id": "1cffa48107164161832bc2e1ea150dba",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "caea74f1ca7d4b15924714d12a2df843",
+      "End": "306de00e55ce47fe8ddccf8ba893b740",
+      "Id": "f9db1f278eaf4b6a9cee92e048c361f5",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "4e2f222052634f74a39452d98ca959bb",
+      "End": "5d4489597b984db1b13d6a21f683b891",
+      "Id": "f9740c47df1a40ad8179219d2ec02e5e",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "ed9b722dad994639ab13d105eb27dd94",
+      "End": "a47312cc28b24f4b831caa39a75f77ef",
+      "Id": "913c0fb7f33c4b7698c2c6b0aefc98d9",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "9b9e36dac0984bae8089f1012b945f09",
+      "End": "54651a8f73f641edb1f5d627f2cb5225",
+      "Id": "cd304b06e8a7498cb6dfc2e738f784c9",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "613d9277fa414911a042626fbeced8a9",
+      "End": "9ab60c95eacf498dad829bc25faffe44",
+      "Id": "5bb4e326074c4c3dbe8abe04baaee510",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "1ff051b71e55433491ce339906521e4d",
+      "End": "58d0a731d4024341b9503043c8e27fe9",
+      "Id": "e3eb1c60de414eb3b3a6206623937c8f",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "3681633d2fcb4b9182b3ced776c9e1cd",
+      "End": "161c2b9720d1400489761dcb51e25562",
+      "Id": "faf3d2509b174ce38034f3a5427411c2",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "4362f56f16c246eea1ef69cc240e6a57",
+      "End": "1dd5abfbb5be41dfb994111fa21cce9d",
+      "Id": "123fd9e7394142d98ae0845b1ff513ad",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "0740c2612ccc4a89b289e834c8447cb4",
+      "End": "f246f7c7eef24b7bbdbf68b9dc54a950",
+      "Id": "75a1ab606ec74281b70286c96500d90e",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "1ae8744cef1e45048929caf85e74e48b",
+      "End": "3c896ae141c54892848d3e43c1a5b426",
+      "Id": "a7a086ddcf80464599cc9f1a0fe8d1e9",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "0aa8f6a897c54f86afe3e85fa10161df",
+      "End": "2f7eabf915004d1ab5d1f272ebf5d416",
+      "Id": "f16061129f1f422e9836e86e594166b6",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "87d910b171464bc0b3fca055cb135ce8",
+      "End": "0b8c4c2a6a574ee0be407b1c26089836",
+      "Id": "e2d4261a50e842668f765f79c0385bb8",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "eca71a02c5174c36b4fa1b477faee940",
+      "End": "966f7e27e9c241149c654141c56f58c0",
+      "Id": "5b030b9b295046a5b476804c32c8a23a",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "8d00d61f28884d85824e1168b4cc6b1b",
+      "End": "28436f3bbf634cd0a0ec2b06da099837",
+      "Id": "5c6aa7f4c8bb49c39dcf0e245d68f953",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "169fd570293347f4aded0d23b3af49c3",
+      "End": "e18c17e4ac0f4e5b9a4473afcab6b6f3",
+      "Id": "36e334d289ea4c06a940a3837720c82b",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "e06a8e626e0d40b992c62a415b560bc0",
+      "End": "3037ab3c86e640dfab074a820453d97a",
+      "Id": "7b1d0051f3a742419e35946b8986fb4e",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "03170b3e282649dfaf6f837ddb66db09",
+      "End": "111bfc05eb43423696b8b5b1ba8419cf",
+      "Id": "da8911de94f54a7db8b88bbcfc475643",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "90c4aaf4e5074c509038e4488f56a6e5",
+      "End": "5980d07f64bd448c95b89b0e3625231d",
+      "Id": "52551fb5761f4ddd886f02042e77031b",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "64f4b1e6094943fb93bfef4cac83b045",
+      "End": "124f46256f924662bd5f27fcf9d85f96",
+      "Id": "92240fccbecf4541bc39fda0cccccfd2",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "9420d7b94b084b3188fb660578f85a51",
+      "End": "82713c1f42484f88b9196b5cd9c6d053",
+      "Id": "c7d4778575eb44e2b003ec487e2a0c39",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "e99c767e2d024ad0a97d34a3391cb696",
+      "End": "e65c576b38e641509e43e030a1912815",
+      "Id": "58c0c5f0122545179fb8f0acc0145391",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "3857e2f83d3546bfb7f60905f75f583d",
+      "End": "05c8f661c69a441b83fbfe52d6c5bf39",
+      "Id": "a18b4084d2004a429cb55871181378ff",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "c080a5c925b04c9eb360e0d1892dfc13",
+      "End": "e4ef0ff931d9410abc950cb29fd85c60",
+      "Id": "29fac283aa3240c4a6311fe4e0e19702",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "90d6999ae35441f2945f89cd0b585c60",
+      "End": "649436c1db4748f7bbb21e8fd0c29e04",
+      "Id": "3ce71534cba8419faa8cff4e25fd1eef",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "2110bfe110e94c3b8f0bcf0900364a43",
+      "End": "a9280f3dbb9140e2a8911b5bae363d35",
+      "Id": "495f9d65f2684abb83ad7994115ee051",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "2110bfe110e94c3b8f0bcf0900364a43",
+      "End": "f92eeb811c0047a48ff4c53d7710d14f",
+      "Id": "dbaea60730ef47eb8c42aba945063c56",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "2110bfe110e94c3b8f0bcf0900364a43",
+      "End": "e233342a7f064a0c8a694adbcfd4b21d",
+      "Id": "df9a982aba6f4182b2a29f2dc62fddad",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "a27908bab8294ab4bcba63bd1fa391d2",
+      "End": "04c3b3c7305e4f0a9764cb498bc3e1d8",
+      "Id": "71acf9f230c04a44932941662699cab6",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "a27908bab8294ab4bcba63bd1fa391d2",
+      "End": "1288cff935744966809f31929dac7ac0",
+      "Id": "9eb8429b09d74bc8a999e731ea2917a7",
+      "IsHidden": "False"
+    },
+    {
+      "Start": "1a56523eee4d4b88bdc194854f273159",
+      "End": "09329c2b8a21450faa92a641919546bf",
+      "Id": "12d1b830210a4c78896bcd77b5d13440",
+      "IsHidden": "False"
+    }
+  ],
+  "Dependencies": [],
+  "NodeLibraryDependencies": [
+    {
+      "Name": "Material.csv",
+      "ReferenceType": "External",
+      "Nodes": [
+        "890459855abc4df69e2b1a2e816b8b06",
+        "19550f0b2bbf46698bd3b09cd851873c"
+      ]
+    }
+  ],
+  "Thumbnail": "",
+  "GraphDocumentationURL": null,
+  "ExtensionWorkspaceData": [
+    {
+      "ExtensionGuid": "28992e1d-abb9-417f-8b1b-05e053bee670",
+      "Name": "Eigenschaften",
+      "Version": "2.17",
+      "Data": {}
+    }
+  ],
+  "Author": "",
+  "Linting": {
+    "activeLinter": "Keine",
+    "activeLinterId": "7b75fb44-43fd-4631-a878-29f4d5d8399a",
+    "warningCount": 0,
+    "errorCount": 0
+  },
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 1.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.17.0.3472",
+      "RunType": "Automatic",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "_Hintergrundvorschau",
+      "EyeX": -6024.0908203125,
+      "EyeY": 6663.13916015625,
+      "EyeZ": 7782.783203125,
+      "LookX": 6019.0908203125,
+      "LookY": -6652.13916015625,
+      "LookZ": -7790.783203125,
+      "UpX": 0.22572517395019531,
+      "UpY": 0.92934739589691162,
+      "UpZ": -0.29216679930686951
+    },
+    "ConnectorPins": [
+      {
+        "Left": 3061.9207697515935,
+        "Top": -409.98284531584119,
+        "IsHidden": false,
+        "ConnectorGuid": "36e334d2-89ea-4c06-a940-a3837720c82b"
+      }
+    ],
+    "NodeViews": [
+      {
+        "Name": "Beam.GetLength",
+        "ShowGeometry": true,
+        "Id": "874c29c98f114f9b8195d24b599a74d9",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 749.21899515118639,
+        "Y": 245.71051339716132
+      },
+      {
+        "Name": "Beam.GetBeamSawInformation",
+        "ShowGeometry": true,
+        "Id": "1f41ee8203344de4b5585133686df945",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 746.142721747708,
+        "Y": 490.62072827836727
+      },
+      {
+        "Name": "Code Block Angle",
+        "ShowGeometry": true,
+        "Id": "4cbc37891c894bd4b3383e1f40e806d8",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1072.4053252831941,
+        "Y": 524.33262025550744
+      },
+      {
+        "Name": "Start Winkel Flansch",
+        "ShowGeometry": true,
+        "Id": "4a85c1d881da4f5391fc4fd1d1854785",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1894.8796445031271,
+        "Y": 299.78472884107822
+      },
+      {
+        "Name": "Start Winkel Steg",
+        "ShowGeometry": true,
+        "Id": "aef54d3fe4db4ccfaa61978ca94ca2e7",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1894.3896322887772,
+        "Y": 600.57843359127992
+      },
+      {
+        "Name": "Ende Winkel Flansch",
+        "ShowGeometry": true,
+        "Id": "07f395195de3418381def7e4f3c7b035",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1899.2415664031971,
+        "Y": 900.74009166784845
+      },
+      {
+        "Name": "Ende Winkel Steg",
+        "ShowGeometry": true,
+        "Id": "f6e927cf340c4313869dacb7402fcfa8",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1901.1863633600972,
+        "Y": 1204.2027588690285
+      },
+      {
+        "Name": "Längen",
+        "ShowGeometry": true,
+        "Id": "528af7b6839940d988e15ceb5c6ff50c",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1892.7780853580371,
+        "Y": -7.8147574657366476
+      },
+      {
+        "Name": "Code Block Length",
+        "ShowGeometry": true,
+        "Id": "b40f76455806497087a8ff9583932d53",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1177.53384645386,
+        "Y": 240.70177338997109
+      },
+      {
+        "Name": "Data.ExportCSV",
+        "ShowGeometry": true,
+        "Id": "64dac5a8fb184da691801b09e9a224f4",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 3611.345987610418,
+        "Y": 387.58536447249969
+      },
+      {
+        "Name": "Dateiname",
+        "ShowGeometry": true,
+        "Id": "e5c4a1d91f4c43f59cad0714182cf96a",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -1237.2677441718301,
+        "Y": 364.08788082440219
+      },
+      {
+        "Name": "Zielordner",
+        "ShowGeometry": true,
+        "Id": "7c139cdf92b3470db44e8b013f70092e",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -1479.7044167687095,
+        "Y": 204.4459499436233
+      },
+      {
+        "Name": "Generate path",
+        "ShowGeometry": true,
+        "Id": "890459855abc4df69e2b1a2e816b8b06",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 750.13162701004944,
+        "Y": -460.18901850324414
+      },
+      {
+        "Name": "Watch",
+        "ShowGeometry": true,
+        "Id": "19550f0b2bbf46698bd3b09cd851873c",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1474.9567434139606,
+        "Y": -452.11357418786406
+      },
+      {
+        "Name": "SelectAdvanceSteelObjects",
+        "ShowGeometry": true,
+        "Id": "c415763f636f4b2298e613b6803cfbe5",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -1495.3138207115767,
+        "Y": 757.09892886361831
+      },
+      {
+        "Name": "Property.GetObjectProperties",
+        "ShowGeometry": true,
+        "Id": "eefb7d5fb81e4a7b9227e3d6ef1d8227",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 748.942150402564,
+        "Y": 27.748788524766269
+      },
+      {
+        "Name": "Profileigenschaften Liste",
+        "ShowGeometry": true,
+        "Id": "229c4a55403e478185ca9358523b290c",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1176.7685112914407,
+        "Y": -70.780556021954
+      },
+      {
+        "Name": "Python Script",
+        "ShowGeometry": true,
+        "Id": "bcc504ea7af0425b82a52cf49d29a4b3",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2702.71224782054,
+        "Y": 399.74689313970435
+      },
+      {
+        "Name": "Watch",
+        "ShowGeometry": true,
+        "Id": "a969da3fa97049579ad992ea32cbeaa4",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2940.5732811880007,
+        "Y": 399.5476982975793
+      },
+      {
+        "Name": "Alle Elemente",
+        "ShowGeometry": true,
+        "Id": "c097c984ef034d93bd12caf8e8338f84",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -1031.1651305019584,
+        "Y": 760.28982007137188
+      },
+      {
+        "Name": "Python Script Object Filter",
+        "ShowGeometry": true,
+        "Id": "8732e87678bd4b62b2da5a181e77244b",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -728.3532332314528,
+        "Y": 758.73258309095945
+      },
+      {
+        "Name": "Code Block",
+        "ShowGeometry": true,
+        "Id": "8cafc9acf4694ab28367174f6ea2681f",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": -421.80206692693787,
+        "Y": 758.86461750707485
+      },
+      {
+        "Name": "Träger",
+        "ShowGeometry": true,
+        "Id": "276298edc1384f7cbb8d067bb4e4d566",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 185.31802198493233,
+        "Y": 677.78455050691662
+      },
+      {
+        "Name": "Bleche",
+        "ShowGeometry": true,
+        "Id": "6b2cbf7c53d941aeb543941222c536ed",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 181.61954169592241,
+        "Y": 976.91879115478469
+      },
+      {
+        "Name": "Plate.GetPhysicalLengthAndWidth",
+        "ShowGeometry": true,
+        "Id": "43c6358a03d44c59b5b09a3e43ea3c85",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 793.48874765299274,
+        "Y": 1715.9438225012877
+      },
+      {
+        "Name": "Watch",
+        "ShowGeometry": true,
+        "Id": "a0cd5fc192a14b979a7d58592c9f4adb",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1170.4183752237207,
+        "Y": 1570.1928871695268
+      },
+      {
+        "Name": "SteelObject.GetQuantityInModel",
+        "ShowGeometry": true,
+        "Id": "e3df8b0c70894ca5802394a09e9ea3a1",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 798.07040809594616,
+        "Y": 1568.2751727687937
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "3afc0749856740adb4f539ec2fea31d0",
+        "Title": "Speicherort + Name",
+        "DescriptionText": "Erstellt einen Pfad in welchem die CSV Datei gespeichert wird.",
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [
+          "e5c4a1d91f4c43f59cad0714182cf96a",
+          "7c139cdf92b3470db44e8b013f70092e"
+        ],
+        "HasNestedGroups": false,
+        "Left": -1489.7044167687095,
+        "Top": 131.11261661028996,
+        "Width": 438.0,
+        "Height": 364.64193088077889,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 204.4459499436233,
+        "InitialHeight": 304.64193088077889,
+        "TextblockHeight": 63.333333333333336,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "0127e98ed6f84330a07c0b4e9bcc7a98",
+        "Title": "Elemente Auswählen",
+        "DescriptionText": "Drücke auf Ändern und wähle dann im Modell die Profile aus",
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [
+          "c415763f636f4b2298e613b6803cfbe5"
+        ],
+        "HasNestedGroups": false,
+        "Left": -1505.3138207115767,
+        "Top": 631.76559553028494,
+        "Width": 302.66666666666674,
+        "Height": 275.66666666666674,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 757.09892886361831,
+        "InitialHeight": 145.0,
+        "TextblockHeight": 115.33333333333334,
+        "Background": "#FFC1D676"
+      },
+      {
+        "Id": "88541a7d42b6493eb66eed945c262ca7",
+        "Title": "Träger Information ermitteln",
+        "DescriptionText": "Hier keine Änderungen vornehmen!",
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [
+          "874c29c98f114f9b8195d24b599a74d9",
+          "1f41ee8203344de4b5585133686df945",
+          "4cbc37891c894bd4b3383e1f40e806d8",
+          "4a85c1d881da4f5391fc4fd1d1854785",
+          "aef54d3fe4db4ccfaa61978ca94ca2e7",
+          "07f395195de3418381def7e4f3c7b035",
+          "f6e927cf340c4313869dacb7402fcfa8",
+          "528af7b6839940d988e15ceb5c6ff50c",
+          "b40f76455806497087a8ff9583932d53",
+          "eefb7d5fb81e4a7b9227e3d6ef1d8227",
+          "229c4a55403e478185ca9358523b290c"
+        ],
+        "HasNestedGroups": false,
+        "Left": 736.142721747708,
+        "Top": -144.11388935528734,
+        "Width": 1452.3769749457224,
+        "Height": 1646.649981557649,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": -70.780556021954,
+        "InitialHeight": 1540.8430253313672,
+        "TextblockHeight": 63.333333333333336,
+        "Background": "#FFFFAA45"
+      },
+      {
+        "Id": "d2ef38b6014e418d948889e296689b89",
+        "Title": "Pfad erstellen",
+        "DescriptionText": "Hier keine Änderungen vornehmen.",
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [
+          "890459855abc4df69e2b1a2e816b8b06",
+          "19550f0b2bbf46698bd3b09cd851873c"
+        ],
+        "HasNestedGroups": false,
+        "Left": 740.13162701004944,
+        "Top": -533.52235183657751,
+        "Width": 1242.1584497372444,
+        "Height": 234.33333333333337,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": -460.18901850324414,
+        "InitialHeight": 153.07544431538008,
+        "TextblockHeight": 63.333333333333336,
+        "Background": "#FFFFAA45"
+      },
+      {
+        "Id": "f39f7dbaf3c74303997154ee257f4d07",
+        "Title": "Filter Funktion",
+        "DescriptionText": "Filtert die Objekte nach Träger und Bleche (Hier keine Änderungen vornehmen)",
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [
+          "c097c984ef034d93bd12caf8e8338f84",
+          "8732e87678bd4b62b2da5a181e77244b",
+          "8cafc9acf4694ab28367174f6ea2681f",
+          "276298edc1384f7cbb8d067bb4e4d566",
+          "6b2cbf7c53d941aeb543941222c536ed"
+        ],
+        "HasNestedGroups": false,
+        "Left": -1041.1651305019584,
+        "Top": 604.45121717358325,
+        "Width": 1513.816485820224,
+        "Height": 670.8009073145347,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 677.78455050691662,
+        "InitialHeight": 444.13424064786807,
+        "TextblockHeight": 63.333333333333336,
+        "Background": "#FF848484"
+      },
+      {
+        "Id": "97a24da4ccbd42e1a822c4215401ede6",
+        "Title": "CSV Datei mit Einträgen erstellen",
+        "DescriptionText": "Hier keine Änderungen vornehmen",
+        "IsExpanded": true,
+        "WidthAdjustment": 0.0,
+        "HeightAdjustment": 0.0,
+        "Nodes": [
+          "64dac5a8fb184da691801b09e9a224f4",
+          "bcc504ea7af0425b82a52cf49d29a4b3",
+          "a969da3fa97049579ad992ea32cbeaa4"
+        ],
+        "HasNestedGroups": false,
+        "Left": 2692.71224782054,
+        "Top": 314.25203113916638,
+        "Width": 1129.9670731232113,
+        "Height": 385.82819533387129,
+        "FontSize": 36.0,
+        "GroupStyleId": "00000000-0000-0000-0000-000000000000",
+        "InitialTop": 387.58536447249969,
+        "InitialHeight": 342.494862000538,
+        "TextblockHeight": 63.333333333333336,
+        "Background": "#FFD4B6DB"
+      }
+    ],
+    "X": -1810.9588315085298,
+    "Y": 226.77410151704032,
+    "Zoom": 0.696299999471395
+  }
+}
